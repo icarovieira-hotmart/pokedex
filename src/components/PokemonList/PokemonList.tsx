@@ -22,7 +22,7 @@ const PokemonList = () => {
 	}, [])
 	return (
 		<div>
-			 <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 2, maxWidth: '600px', margin: 'auto' }}>
+			 <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2, maxWidth: '500px', margin: 'auto' }}>
 				{pokemons.map( (item, key) => {
 					return (
 						<PokemonCard

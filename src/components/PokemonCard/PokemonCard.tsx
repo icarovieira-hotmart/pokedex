@@ -1,5 +1,7 @@
 import { Card, CardMedia, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import './PokemonCard.scss';
 
 interface Pokemon {
@@ -8,6 +10,7 @@ interface Pokemon {
 }
 
 const PokemonCard = ({name, url}: Pokemon) => {
+	const navigate = useNavigate()
 	const [pokemonInfo, setPokemonInfo ] = useState<any>({})
 
 	useEffect( () => {
@@ -22,8 +25,12 @@ const PokemonCard = ({name, url}: Pokemon) => {
 		getPokemonInfo()
 	}, [url])
 
+	const handleClick = () => {
+		navigate(`pokemon/${pokemonInfo.id}`)
+	}
+
   return (
-		<div className="pokemon-card">
+		<div className="pokemon-card" onClick={handleClick}>
 			<Card>
 				<CardMedia
 					component="img"
