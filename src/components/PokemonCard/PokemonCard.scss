@@ -1,0 +1,15 @@
+.pokemon-card {
+	border-radius: 5px;
+
+	&:hover {
+		box-shadow: 0.5rem;
+	}
+
+	&__title {
+		display: block;
+		font-size: 1rem;
+		text-align: center;
+		color: #fff;
+		background-color: #646464;
+	}
+}
