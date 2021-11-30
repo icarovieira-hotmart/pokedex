@@ -1,4 +1,70 @@
 .pokemon-details {
     max-width: 350px;
     margin: auto;
+		padding: 20px;
+
+    &__header {
+        display: flex;
+				justify-content: space-between;
+				
+    }
+
+		&__image {
+			display: flex;
+			justify-content: center;
+			img {
+				width: 300px;
+			}
+			
+		}
+
+		&__badge {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 20px;
+
+			&__item {
+				margin:5px ;
+			}
+
+		}
+
+		&__about {
+			&__title {
+				display: block;
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			&__atributes {
+				display: flex;
+				justify-content: center;
+
+				&__item {
+					margin: 10px;
+					&__stat {
+						align-items: center;
+					}
+				}
+
+			}
+		}
+
+		&__stats {
+			margin-top: 20px;
+			&__title {
+				text-align: center;
+				margin: auto;
+				display: block;
+			}
+
+			&__item {
+				margin: 10px 0;
+
+				&__description {
+					margin-bottom: 5px;
+				}
+			}
+		}
+
 }

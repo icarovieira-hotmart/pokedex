@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Chip, Typography, IconButton } from '@mui/material';
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import HeightIcon from '@mui/icons-material/Height';
 import { useNavigate } from 'react-router-dom';
 
 import './PokemonDetails.scss'
@@ -31,11 +33,11 @@ const PokemonDetails = () => {
 	const renderHeader = () => {
 		return (
 			<div className="pokemon-details__header">
-				<IconButton aria-label="delete" size="small" onClick={handleBackClick}>
+				<IconButton aria-label="delete" size="medium" onClick={handleBackClick}>
         	<KeyboardBackspaceIcon fontSize="inherit" />
 				</IconButton>
 				<Typography variant="h4" gutterBottom component="div">
-					{pokemon.name} | {pokemon.id}
+					{pokemon.name} | #{pokemon.id}
 				</Typography>
 			</div>
 		)
@@ -43,10 +45,44 @@ const PokemonDetails = () => {
 
 	const renderTypeBadges = () => {
 		return (
-			<div className="pokemon-detail__badge">
+			<div className="pokemon-details__badge">
 				{pokemon?.types?.map( (item:any,key:number) => {
-					return <Chip label={item.type.name} />
+					return <Chip className="pokemon-details__badge__item" label={item.type.name} />
 				})}
+			</div>
+		)
+	}
+
+	const renderAbout = () => {
+		return (
+			<div className="pokemon-details__about">
+				<Typography 
+					className="pokemon-details__about__title"
+					gutterBottom
+					component="span">
+					About
+				</Typography>
+				<div className="pokemon-details__about__atributes">
+					<div className="pokemon-details__about__atributes__item">
+						<div className="pokemon-details__about__atributes__stat">
+							<FitnessCenterIcon fontSize="inherit" />
+							{pokemon?.weight}
+						</div>
+						<div className="pokemon-details__about__atributes__label">
+							Weight
+						</div>
+					</div>
+
+					<div className="pokemon-details__about__atributes__item">
+						<div className="pokemon-details__about__atributes__stat">
+							<HeightIcon fontSize="inherit" />
+							{pokemon?.height}
+						</div>
+						<div className="pokemon-details__about__atributes__label">
+							Height
+						</div>
+					</div>
+				</div>
 			</div>
 		)
 	}
@@ -54,12 +90,23 @@ const PokemonDetails = () => {
 	const renderStats = () => {
 		return (
 			<div className="pokemon-details__stats">
+				<Typography 
+					className="pokemon-details__stats__title"
+					gutterBottom
+					component="span">
+					Base Stats
+				</Typography>
 				{pokemon?.stats?.map( (item:any, key:number) => {
 					return (
-						<div>
-							{item.stat.name} | {item.base_stat}
+						<div className="pokemon-details__stats__item">
+							<Typography 
+								className="pokemon-details__stats__item__description"
+								gutterBottom
+								component="span">
+								{item.stat.name} | {item.base_stat}
+							</Typography>
 							<LinearProgress 
-								className="pokemon-details__stats__bar"
+								className="pokemon-details__stats__item__bar"
 								variant="determinate"
 								value={item.base_stat} />
 						</div>
@@ -69,22 +116,15 @@ const PokemonDetails = () => {
 		)
 	}
 
-	const renderAbout = () => {
-		return (
-			<div className="pokemon-details__about">
-				Height: {pokemon?.height} |
-				Weight: {pokemon?.weight}
-			</div>
-		)
-	}
-
 	return (
 		<div className="pokemon-details">
 			{renderHeader()}
-			<img
-        src={pokemon?.sprites?.front_default}
-        alt={pokemon.name}
-        loading="lazy"/>
+			<div className="pokemon-details__image">
+				<img
+					src={pokemon?.sprites?.front_default}
+					alt={pokemon.name}
+					loading="lazy"/>
+			</div>
 			{renderTypeBadges()}
 			{renderAbout()}
 			{renderStats()}
