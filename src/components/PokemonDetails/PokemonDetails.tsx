@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Chip, Typography, IconButton } from '@mui/material';
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
+import { Card, Skeleton, Box } from '@mui/material';
+import { ReactComponent as Pokeball } from "../../assets/svg/pokeball.svg";
+
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import HeightIcon from '@mui/icons-material/Height';
 import { useNavigate } from 'react-router-dom';
+import { colors } from './../Helpers';
 
 import './PokemonDetails.scss'
 
@@ -30,13 +34,17 @@ const PokemonDetails = () => {
 		navigate(`/`)
 	}
 
+  const getColor = () => {
+    return colors.find(color => color.type === pokemon.types[0].type.name)?.color
+  }
+
 	const renderHeader = () => {
 		return (
 			<div className="pokemon-details__header">
 				<IconButton aria-label="delete" size="medium" onClick={handleBackClick}>
         	<KeyboardBackspaceIcon fontSize="inherit" />
 				</IconButton>
-				<Typography variant="h4" gutterBottom component="div">
+				<Typography variant="h5" gutterBottom component="div" sx={{	textTransform: 'capitalize', fontWeight: 'bold', fontFamily: 'Poppins'}}>
 					{pokemon.name} | #{pokemon.id}
 				</Typography>
 			</div>
@@ -56,7 +64,7 @@ const PokemonDetails = () => {
 	const renderAbout = () => {
 		return (
 			<div className="pokemon-details__about">
-				<Typography 
+				<Typography
 					className="pokemon-details__about__title"
 					gutterBottom
 					component="span">
@@ -105,7 +113,7 @@ const PokemonDetails = () => {
 								component="span">
 								{item.stat.name} | {item.base_stat}
 							</Typography>
-							<LinearProgress 
+							<LinearProgress
 								className="pokemon-details__stats__item__bar"
 								variant="determinate"
 								value={item.base_stat} />
@@ -116,20 +124,61 @@ const PokemonDetails = () => {
 		)
 	}
 
-	return (
-		<div className="pokemon-details">
-			{renderHeader()}
-			<div className="pokemon-details__image">
-				<img
-					src={pokemon?.sprites?.front_default}
-					alt={pokemon.name}
-					loading="lazy"/>
-			</div>
-			{renderTypeBadges()}
-			{renderAbout()}
-			{renderStats()}
-		</div>
-	);
+  const renderImage = () => {
+    return (
+      <>
+        <Box
+          sx={{
+            position: 'relative',
+            textAlign: 'center',
+          }}>
+        <img
+          src={pokemon?.sprites?.front_default}
+          alt={pokemon.name}
+          loading="lazy"/>
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          color: 'white',
+          padding: '10px',
+        }}>
+        <Pokeball className="pokemon-details__iconBackground"/>
+      </Box>
+    </>
+    )
+  }
+
+	if(pokemon.types) {
+    return (
+      <Card className="pokemon-details" sx={{ maxWidth: '345' }}>
+        <div className="pokemon-details__card">
+          <Card sx={{padding: '10px 10px', backgroundColor: getColor()}}>
+            <Box sx={{ position: 'relative', width: '100%', }}>
+              {renderHeader()}
+            </Box>
+            <Box className="pokemon-details__imagePokemon" sx={{ position: 'relative', width: '100%', }}>
+              {renderImage()}
+              <Box sx={{backgroundColor: '#FFF', borderRadius: '5px'}}>
+                {renderTypeBadges()}
+                {renderAbout()}
+                {renderStats()}
+              </Box>
+            </Box>
+          </Card>
+        </div>
+      </Card>
+    );
+  } else {
+    return (
+      <div>
+        <Skeleton variant="text" />
+        <Skeleton variant="rectangular" width={210} height={118} />
+        <Skeleton variant="text" />
+      </div>);
+  }
 }
 
 export default PokemonDetails;

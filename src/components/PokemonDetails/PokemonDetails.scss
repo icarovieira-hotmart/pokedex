@@ -1,27 +1,41 @@
 .pokemon-details {
-    max-width: 350px;
-    margin: auto;
-		padding: 20px;
+  max-width: 350px;
+  margin: auto;
+	font-family: 'Poppins', sans-serif !important;
 
     &__header {
         display: flex;
-				justify-content: space-between;
-				
+		justify-content: space-between;
     }
+
+  &__imagePokemon {
+    justify-content: center;
+    img {
+      width: 230px;
+    }
+  }
+
+	&__iconBackground {
+		width: 140px;
+		height: 140px;
+		opacity: 0.1;
+		color: #FFFFFF;
+	}
 
 		&__image {
 			display: flex;
 			justify-content: center;
 			img {
-				width: 300px;
+				width: 15rem;
 			}
-			
+
 		}
 
 		&__badge {
 			display: flex;
 			justify-content: center;
-			margin-bottom: 20px;
+      text-transform: capitalize;
+      font-family: 'Poppins', sans-serif !important;
 
 			&__item {
 				margin:5px ;
@@ -33,7 +47,6 @@
 			&__title {
 				display: block;
 				text-align: center;
-				margin-bottom: 10px;
 			}
 
 			&__atributes {
@@ -51,7 +64,7 @@
 		}
 
 		&__stats {
-			margin-top: 20px;
+			padding: 20px;
 			&__title {
 				text-align: center;
 				margin: auto;
@@ -62,7 +75,11 @@
 				margin: 10px 0;
 
 				&__description {
+					text-transform: uppercase;
 					margin-bottom: 5px;
+					span {
+						font-family: 'Poppins', sans-serif;
+					}
 				}
 			}
 		}
