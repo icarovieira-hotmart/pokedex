@@ -51,6 +51,7 @@ const PokemonList = () => {
           fullWidth
           type="text"
           id="search"
+          value="search"
           label="Pesquisar"
           defaultValue={search}
           onChange={event => {
@@ -61,6 +62,7 @@ const PokemonList = () => {
           {pokemons.map( (item, key) => {
             return (
               <PokemonCard
+                data-testid="pokemon-card"
                 name={item.name}
                 url={item.url} />
             );
