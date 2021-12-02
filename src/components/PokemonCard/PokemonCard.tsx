@@ -17,19 +17,19 @@ const PokemonCard = ({name, url}: Pokemon) => {
     const [pokemonInfo, setPokemonInfo ] = useState<any>({})
 
     useEffect( () => {
-        const getPokemonInfo = async () => {
-            const pokemonInfo = await fetch(url)
-            const info = await pokemonInfo.json()
+      const getPokemonInfo = async () => {
+        const pokemonInfo = await fetch(url)
+        const info = await pokemonInfo.json()
 
-            setPokemonInfo(info)
-            console.log(info)
-        }
+        setPokemonInfo(info)
+        console.log(info)
+      }
 
-        getPokemonInfo()
+      getPokemonInfo()
     }, [url])
 
     const handleClick = () => {
-        navigate(`pokemon/${pokemonInfo.id}`)
+      navigate(`pokemon/${pokemonInfo.id}`)
     }
 
     const getColor = () => {
@@ -38,7 +38,7 @@ const PokemonCard = ({name, url}: Pokemon) => {
 
   if(pokemonInfo.types) {
     return (
-      <div onClick={handleClick}>
+      <div data-testid="pokemon-card" onClick={handleClick}>
           <Card
             sx={{borderColor: getColor()}}
             className="pokemon-card">
