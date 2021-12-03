@@ -22,18 +22,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
+    - name: Build Tests
       run: |
         npm install
         npm run test
-  cypress-run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
+
+    - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
