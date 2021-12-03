@@ -22,7 +22,6 @@ const PokemonCard = ({name, url}: Pokemon) => {
         const info = await pokemonInfo.json()
 
         setPokemonInfo(info)
-        console.log(info)
       }
 
       getPokemonInfo()
